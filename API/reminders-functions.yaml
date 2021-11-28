@@ -9,6 +9,19 @@ schemes:
 produces:
   - application/json
 paths:
+
+  /:user/reminder:
+    post:
+      summary: Create a reminder
+      operationId: create-reminder
+      x-google-backend:
+        address: https://GCP_REGION-set-reminders.cloudfunctions.net/reminderCreate
+      responses:
+        '201':
+          description: A reminder was created successfully  
+          schema:
+            type: '#/definitions/Reminder'
+        
   /:user/reminder:
     get:
       summary: Get all reminders
@@ -17,14 +30,31 @@ paths:
         address: https://GCP_REGION-set-reminders.cloudfunctions.net/remindersGET
       responses:
         '200':
-          description: A successful response
+          description: Reminders were retrieved successfully
           schema:
             type: array
             items: 
                $ref: '#/definitions/Reminder'
 
+  /:user/reminder/:id:
+    put:
+      summary: Edit a reminder
+      operationId: edit-reminder
+      x-google-backend:
+        address: https://GCP_REGION-set-reminders.cloudfunctions.net/reminderEDIT
+      responses:
+        '204':
+          description: A reminder was edited successfully
 
-
+  /:user/reminder/:id:
+    delete:
+      summary: Delete a reminder
+      operationId: delete-reminder
+      x-google-backend:
+        address: https://GCP_REGION-set-reminders.cloudfunctions.net/reminderDELETE
+      responses:
+        '204':
+          description: A reminder was deleted successfully        
 
 definitions:
   Reminder:
