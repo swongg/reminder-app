@@ -2,7 +2,7 @@
 swagger: '2.0'
 info:
   title: reminders-api 
-  description: Sample API on API Gateway with a Google Cloud Functions backend
+  description: API gateway for reminder operation cloud functions
   version: 1.0.0
 schemes:
   - https
@@ -15,7 +15,7 @@ paths:
       summary: Create a reminder
       operationId: create-reminder
       x-google-backend:
-        address: https://GCP_REGION-set-reminders.cloudfunctions.net/reminderCreate
+        address: https://us-central1-set-reminders.cloudfunctions.net/reminderCreate
       responses:
         '201':
           description: A reminder was created successfully  
@@ -27,7 +27,7 @@ paths:
       summary: Get all reminders
       operationId: get-all-reminders
       x-google-backend:
-        address: https://GCP_REGION-set-reminders.cloudfunctions.net/remindersGET
+        address: https://us-central1-set-reminders.cloudfunctions.net/remindersGET
       responses:
         '200':
           description: Reminders were retrieved successfully
@@ -41,7 +41,7 @@ paths:
       summary: Edit a reminder
       operationId: edit-reminder
       x-google-backend:
-        address: https://GCP_REGION-set-reminders.cloudfunctions.net/reminderEDIT
+        address: https:/us-central1-set-reminders.cloudfunctions.net/reminderEDIT
       responses:
         '204':
           description: A reminder was edited successfully
@@ -51,7 +51,7 @@ paths:
       summary: Delete a reminder
       operationId: delete-reminder
       x-google-backend:
-        address: https://GCP_REGION-set-reminders.cloudfunctions.net/reminderDELETE
+        address: https://us-central1-set-reminders.cloudfunctions.net/reminderDELETE
       responses:
         '204':
           description: A reminder was deleted successfully        
