@@ -3,7 +3,11 @@ const createError = require("http-errors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const { urlencoded, json } = require("body-parser");
+const passport = require("passport");
 const reminderRouter = require("./routes/reminder");
+const {initialiseAuthentication} = require("./auth");
+const router = require("./router");
 
 const app = express();
 // view engine setup
@@ -12,9 +16,13 @@ app.set("view engine", "pug");
 
 // add middleware
 app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(urlencoded({ extended: true }));
+app.use(json());
 app.use(cookieParser());
+app.use(passport.initialize());
+
+router(app);
+initialiseAuthentication(app);
 
 app.use("/", reminderRouter);
 
