@@ -5,9 +5,9 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const { urlencoded, json } = require("body-parser");
 const passport = require("passport");
-const reminderRouter = require("./routes/reminder");
-const {initialiseAuthentication} = require("./auth");
-const router = require("./router");
+// const {initializeAuthentication} = require("./auth");
+require("dotenv").config();
+const routes = require("./routes");
 
 const app = express();
 // view engine setup
@@ -21,10 +21,8 @@ app.use(json());
 app.use(cookieParser());
 app.use(passport.initialize());
 
-router(app);
-initialiseAuthentication(app);
-
-app.use("/", reminderRouter);
+// initializeAuthentication(app);
+app.use("/", routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

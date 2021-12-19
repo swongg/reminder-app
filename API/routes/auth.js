@@ -1,6 +1,11 @@
-import express from "express";
+const express = require("express");
 
 const router = express.Router();
+
+router.get("/", (req, res, next) => {
+  res.send("AUTH");
+});
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -13,4 +18,4 @@ router.post("/register", async (req, res) => {
   return res.status(200).json({ success: true, data: null });
 });
 
-export default router;
+module.exports = router;

@@ -3,7 +3,7 @@ const router = express.Router();
 const ReminderCtrl = require("../controllers/reminder");
 
 router.get("/", (req, res, next) => {
-  res.send("HELLO WORLD");
+  res.send("REMINDERS");
 });
 
 router.post("/:user", ReminderCtrl.create_reminder);
