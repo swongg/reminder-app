@@ -9,8 +9,6 @@ const passport = require("passport");
 // const {initializeAuthentication} = require("./auth");
 require("dotenv").config();
 const routes = require("./routes");
-
-
 const app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
