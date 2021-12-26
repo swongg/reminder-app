@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const { urlencoded, json } = require("body-parser");
 const passport = require("passport");
-// const {initializeAuthentication} = require("./auth");
+const {initializeAuthentication} = require("./auth");
 require("dotenv").config();
 const routes = require("./routes");
 const app = express();
@@ -21,7 +21,7 @@ app.use(json());
 app.use(cookieParser());
 app.use(passport.initialize());
 
-// initializeAuthentication(app);
+initializeAuthentication(app);
 app.use("/", routes);
 
 // catch 404 and forward to error handler
