@@ -1,7 +1,6 @@
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
 const { to } = require("await-to-js");
-
 const { getUserById } = require("../../controllers/user");
 const { signToken } = require("../utils");
 
