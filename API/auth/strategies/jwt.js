@@ -29,7 +29,13 @@ const strategy = () => {
 
 const login = (req, user) => {
   return new Promise((resolve, reject) => {
-    // TODO
+    req.login(user, { session: false }, (err) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(signToken(user));
+    });
   });
 };
 
