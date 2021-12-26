@@ -1,16 +1,13 @@
 const mongoose = require("mongoose");
 const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xfgzh.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 mongoose
-  .connect(process.env.DB_CONNECTION_STRING || "", {
-    useFindAndModify: false,
-    autoIndex: false, // Don't build indexes
-    reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
-    reconnectInterval: 500, // Reconnect every 500ms
-    poolSize: 10, // Maintain up to 10 socket connections
-    // If not connected, return errors immediately rather than waiting for reconnect
-    bufferMaxEntries: 0,
+  .connect(uri, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .catch((e) => {
     console.error("Connection error", e.message);
