@@ -1,7 +1,7 @@
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { UserModel } = require("../controllers/user");
+const User = require("../models/user");
 
 const hashPassword = async (password) => {
   if (!password) {
@@ -17,7 +17,7 @@ const setup = () => {
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await UserModel.findById(id);
+      const user = await User.findById(id);
       return done(null, user);
     } catch (err) {
       return done(err, null);
