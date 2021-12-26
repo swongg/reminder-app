@@ -1,17 +1,33 @@
-const passport = require('passport');
-const { UserModel } = require('../controllers/user');
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { UserModel } = require("../controllers/user");
+
+const hashPassword = async (password) => {
+  if (!password) {
+    throw new Error("Password was not provided");
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(password, salt);
+};
 
 const setup = () => {
-  passport.serializeUser((user, done) => done(null, user._id))
+  passport.serializeUser((user, done) => done(null, user._id));
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await UserModel.findById(id)
-      return done(null, user)
+      const user = await UserModel.findById(id);
+      return done(null, user);
     } catch (err) {
-      return done(err, null)
+      return done(err, null);
     }
-  })
-}
+  });
+};
 
-module.exports = { setup }
+const signToken = (user) => {
+  return jwt.sign({ data: user }, process.env.JWT_SECRET, {
+    expiresIn: 604800,
+  });
+};
+module.exports = { setup, signToken, hashPassword };
