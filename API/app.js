@@ -9,12 +9,14 @@ const passport = require("passport");
 const {initializeAuthentication} = require("./auth");
 require("dotenv").config();
 const routes = require("./routes");
+const cors = require("cors");
 const app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 // add middleware
+app.use(cors());
 app.use(logger("dev"));
 app.use(urlencoded({ extended: true }));
 app.use(json());
