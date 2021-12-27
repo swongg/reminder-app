@@ -1,4 +1,4 @@
-const host = 'http://localhost:8080/api';
+const host = "http://localhost:8080/api";
 
 const callFetchAsync = async (url, method, body, headers = {}) => {
   try {
