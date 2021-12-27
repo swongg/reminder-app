@@ -63,6 +63,7 @@ router.post("/register", async (req, res) => {
   );
 
   if (err) {
+    console.log(err);
     return res
       .status(500)
       .json({ success: false, data: "Email is already taken" });
