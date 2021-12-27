@@ -12,6 +12,10 @@ const hashPassword = async (password) => {
   return await bcrypt.hash(password, salt);
 };
 
+const verifyPassword = async (candidate, actual) => {
+  return await bcrypt.compare(candidate, actual);
+};
+
 const setup = () => {
   passport.serializeUser((user, done) => done(null, user._id));
 
@@ -30,4 +34,4 @@ const signToken = (user) => {
     expiresIn: 604800,
   });
 };
-module.exports = { setup, signToken, hashPassword };
+module.exports = { setup, signToken, hashPassword, verifyPassword };
